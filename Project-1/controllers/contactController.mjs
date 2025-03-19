@@ -6,6 +6,7 @@ import {
 export async function getAllContacts(req, res) {
   try {
     const contacts = await getAllContactsFromDB();
+
     if (contacts.length === 0) {
       return res.status(404).json({ message: 'no data found' });
     }
