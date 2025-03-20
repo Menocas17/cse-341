@@ -9,7 +9,7 @@ const doc = {
     description: 'This API allows you to create and manage a contact book list',
   },
   host: 'localhost:3000',
-  schemes: ['http'],
+  schemes: ['http', 'https'],
 };
 
 swaggerAutogen(outputFile, endPointsFiles, doc);

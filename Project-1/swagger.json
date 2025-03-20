@@ -7,7 +7,7 @@
   },
   "host": "https://cse-341-project-1-vm8u.onrender.com",
   "basePath": "/",
-  "schemes": ["http"],
+  "schemes": ["https, http"],
   "paths": {
     "/": {
       "get": {
