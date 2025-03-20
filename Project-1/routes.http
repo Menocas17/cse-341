@@ -1,3 +1,35 @@
+
+### Get all the contact list
+
 GET http://localhost:3000/get-all
 
-# GET http://localhost:3000/get-by-name?name=michael
+
+### Get contact by name
+
+GET http://localhost:3000/get-by-name?name=michael
+
+
+### Create a new contact
+
+POST http://localhost:3000/add-new HTTP/1.1
+Content-Type: application/json
+
+{
+    "firstName" : "Test",
+    "lastname" : "testLastName",
+    "email" : "thisisatest@gmail.com",
+    "birthday" : "2000-01-01",
+    "favoriteColor" : "testColor"
+}
+
+### update a contact by ID 
+PUT http://localhost:3000/update/67db36b586ed1c99f6f6f6b0 HTTP/1.1
+Content-Type: application/json
+
+{
+    "firstName": "TestUpdate"
+}
+
+### delete a contact by ID
+
+DELETE http://localhost:3000/delete/67db36b586ed1c99f6f6f6b0

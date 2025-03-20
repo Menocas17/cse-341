@@ -13,20 +13,24 @@
   "license": "ISC",
   "type": "module",
   "dependencies": {
+    "cors": "^2.8.5",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "mongodb": "^6.14.2",
-    "mongoose": "^8.12.1"
+    "mongoose": "^8.12.1",
+    "swagger-ui-express": "^5.0.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.22.0",
     "eslint": "^9.22.0",
     "eslint-config-node": "^4.1.0",
     "eslint-config-prettier": "^10.1.1",
+    "eslint-plugin-import": "^2.31.0",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prettier": "^5.2.3",
     "globals": "^16.0.0",
     "nodemon": "^3.1.9",
-    "prettier": "^3.5.3"
+    "prettier": "^3.5.3",
+    "swagger-autogen": "^2.23.7"
   }
 }

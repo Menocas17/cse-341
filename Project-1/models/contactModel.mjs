@@ -8,7 +8,11 @@ const contactSchema = new mongoose.Schema({
   favoriteColor: String,
 });
 
-const contactModel = mongoose.model('Contacts', contactSchema, 'Contacts');
+export const contactModel = mongoose.model(
+  'Contacts',
+  contactSchema,
+  'Contacts',
+);
 
 export async function getAllContactsFromDB() {
   const allConctacts = await contactModel.find({});
