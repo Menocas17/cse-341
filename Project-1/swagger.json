@@ -11,7 +11,7 @@
   "paths": {
     "/": {
       "get": {
-        "description": "",
+        "description": "This is the base path of the api and you will get a sentence as response.",
         "responses": {
           "200": {
             "description": "OK"
@@ -21,7 +21,7 @@
     },
     "/get-all": {
       "get": {
-        "description": "",
+        "description": "This endpoint will return all the contacts in the database without any filter applied.",
         "responses": {
           "200": {
             "description": "OK"
@@ -37,7 +37,7 @@
     },
     "/get-by-name": {
       "get": {
-        "description": "",
+        "description": "With this endpoint you can filter the contacts and return an specific contact by his name, it is not case sensitive.",
         "parameters": [
           {
             "name": "name",
@@ -60,7 +60,7 @@
     },
     "/add-new": {
       "post": {
-        "description": "",
+        "description": "With this endpoint you can create a new contact and added to the database. In the response you will get the id of the new contact",
         "parameters": [
           {
             "name": "body",
@@ -99,7 +99,7 @@
     },
     "/update/{id}": {
       "put": {
-        "description": "",
+        "description": "You can update a contact in the database, you can update all the information or just part of the information of a contact in the response will get the contact that was updated with the new info",
         "parameters": [
           {
             "name": "id",
@@ -147,7 +147,7 @@
     },
     "/delete/{id}": {
       "delete": {
-        "description": "",
+        "description": "This endpoint will delete a contact using it's id, and you will receive a message of confirmation as response.",
         "parameters": [
           {
             "name": "id",
