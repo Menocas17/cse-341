@@ -5,9 +5,9 @@
     "description": "This API allows you to create and manage a contact book list",
     "version": "1.0.0"
   },
-  "host": "https://cse-341-project-1-vm8u.onrender.com",
+  "host": "cse-341-project-1-vm8u.onrender.com",
   "basePath": "/",
-  "schemes": ["https, http"],
+  "schemes": ["https", "http"],
   "paths": {
     "/": {
       "get": {

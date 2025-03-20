@@ -8,7 +8,7 @@ const doc = {
     title: 'Contact API for the CSE341 project',
     description: 'This API allows you to create and manage a contact book list',
   },
-  host: 'localhost:3000',
+  host: 'cse-341-project-1-vm8u.onrender.com',
   schemes: ['http', 'https'],
 };
 
