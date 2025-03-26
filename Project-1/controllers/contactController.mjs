@@ -3,6 +3,8 @@ import {
   getContactByNameFromDB,
   contactModel,
 } from '../models/contactModel.mjs';
+import createHttpError from 'http-errors';
+import mongoose from 'mongoose';
 
 export async function getAllContacts(req, res) {
   try {
@@ -20,19 +22,17 @@ export async function getAllContacts(req, res) {
   }
 }
 
-export async function getContactByName(req, res) {
+export async function getContactByName(req, res, next) {
   const contactName = req.query.name;
   try {
     const contactByName = await getContactByNameFromDB(contactName);
     if (contactByName.length === 0) {
-      return res.status(404).json({ message: 'no data found' });
+      throw createHttpError(400, 'No contact with that name in the database');
     }
 
     res.json(contactByName);
   } catch (error) {
-    res
-      .status(500)
-      .json({ message: 'Error retrieving data', error: error.message });
+    next(error);
   }
 }
 
@@ -57,7 +57,7 @@ export async function addNewContact(req, res) {
   }
 }
 
-export async function updateContact(req, res) {
+export async function updateContact(req, res, next) {
   const { id } = req.params;
   const updatedContactInfo = {
     firstName: req.body.firstName,
@@ -73,9 +73,7 @@ export async function updateContact(req, res) {
       { new: true },
     );
     if (!updatedContact) {
-      return res.status(404).json({
-        mesasge: 'Contact not found',
-      });
+      throw createHttpError(404, 'Contact does not exist');
     }
 
     res.json({
@@ -83,7 +81,7 @@ export async function updateContact(req, res) {
       updatedContact: updatedContact,
     });
   } catch (error) {
-    res.status(500).json({ message: 'Error updating the contact', error });
+    next(error);
   }
 }
 

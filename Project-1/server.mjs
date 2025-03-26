@@ -19,6 +19,20 @@ app.use(express.json());
 app.use('/doc', swaggerUI.serve, swaggerUI.setup(swaggerDocumentation));
 app.use('', contactRouter);
 
+app.use(async (req, res, next) => {
+  next({ status: 404, message: 'Sorry, we appear to have lost that page.' });
+});
+
+// error handeling middleware
+
+app.use((err, req, res, next) => {
+  // console.error(err.stack);
+  res.status(err.status || 500).json({
+    message: err.message || 'Internal server error',
+    status: err.status || 500,
+  });
+});
+
 // setting the server up
 (async () => {
   await connectDB();
