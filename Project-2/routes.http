@@ -1,0 +1,30 @@
+### Create a new user
+
+POST http://localhost:3000/users/register HTTP/1.1
+Content-Type: application/json
+
+{
+    "user_name": "Rodolfo",
+    "user_lastName": "Menocal",
+    "user_birthday": "2000-01-01",
+    "user_address": "De la plaza Julio Martinez 6c al lago, 1c arriba",
+    "user_email": "rodolfomenocal1755@gmail.com",
+    "user_password": "TestingPassword17!",
+    "user_phone_number":"+505 769181745"
+}
+
+### Update user 
+
+PUT http://localhost:3000/users/editAccount/67ec506030faaa61fdb0c362 HTTP/1.1
+Content-Type: application/json
+
+{
+    "user_name": "Rodolfo Jose",
+    "user_lastName": "Menocal Castillo",
+    "user_birthday": "2000-06-17",
+    "user_type": "employee"
+}
+
+### delete an user
+
+DELETE http://localhost:3000/users/delete/67ec506030faaa61fdb0c362
