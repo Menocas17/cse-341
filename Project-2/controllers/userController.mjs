@@ -46,6 +46,7 @@ export async function editingAccount(req, res, next) {
     user_password: req.body.user_password,
     user_phone_number: req.body.user_phone_number,
     user_type: req.body.user_type,
+    cart_id: req.body.cart_id,
   };
 
   try {

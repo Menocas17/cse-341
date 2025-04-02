@@ -43,11 +43,19 @@ GET http://localhost:3000/products/67ec2e33af36361fc07eb66e
 POST http://localhost:3000/products/create HTTP/1.1
 Content-Type: application/json
 
+# {
+#     "product_brand": "Nike",
+#     "product_color": "White",
+#     "product_description": "Amazing shoes testing",
+#     "product_name": "Air Force One",
+#     "product_price": "89.99"
+# }
+
 {
-    "product_brand": "Nike",
-    "product_color": "White",
-    "product_description": "Amazing shoes testing",
-    "product_name": "Air Force One",
+    "product_brand": "Addidas",
+    "product_color": "Black",
+    "product_description": "Amazing shoes testing 2",
+    "product_name": "Addidas Shoes",
     "product_price": "89.99"
 }
 
@@ -67,4 +75,18 @@ DELETE http://localhost:3000/products/delete/67ec557d45dc8061a19b9c63
 
 ### get cart by user ID
 
-GET http://localhost:3000/carts/67ec2f31af36361fc07eb670
+GET http://localhost:3000/carts/67ed9306f2c98ad71847bc7e
+
+### add item to the cart
+
+PUT http://localhost:3000/carts/update/67ed9306f2c98ad71847bc7e HTTP/1.1
+Content-Type: application/json
+
+{
+    "quantity": 1,
+    "product_id": "67edacab9c529198a2fe3b3c"
+}
+
+### delete an item from the cart
+
+DELETE http://localhost:3000/carts/delete/67ed9306f2c98ad71847bc7e/67ec2e33af36361fc07eb66e
