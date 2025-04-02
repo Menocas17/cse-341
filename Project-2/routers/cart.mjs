@@ -1,10 +1,9 @@
 import { Router } from 'express';
+import { getCartByUserId } from '../controllers/cartController.mjs';
 const router = Router();
 
 //get cart by user id
-router.get('/:user_id', (req, res) => {
-  res.send('Testing routes');
-});
+router.get('/:user_id', getCartByUserId);
 
 //add an item to a cart
 router.put('/update/:user_id', (req, res) => {

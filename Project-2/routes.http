@@ -65,4 +65,6 @@ Content-Type: application/json
 
 DELETE http://localhost:3000/products/delete/67ec557d45dc8061a19b9c63
 
+### get cart by user ID
 
+GET http://localhost:3000/carts/67ec2f31af36361fc07eb670
