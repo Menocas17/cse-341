@@ -6,6 +6,11 @@ import {
   updatingMealPlan,
   deleteMealPlan,
 } from '../controllers/mealsController.mjs';
+import {
+  mealPlanRules,
+  UpdatemealPlanRules,
+  checkRulesResults,
+} from '../utilities/validators.mjs';
 import { handleErrors } from '../utilities/handleErrors.mjs';
 
 const router = Router();
@@ -17,10 +22,20 @@ router.get('/:user_id/get-all-meal-plans', handleErrors(getAllMealPlans));
 router.get('/:meal_plan_id', handleErrors(getMealPlan));
 
 //route for creating a new meal plan for an user
-router.post('/:user_id/create', handleErrors(createMealPlan));
+router.post(
+  '/:user_id/create',
+  mealPlanRules(),
+  checkRulesResults,
+  handleErrors(createMealPlan)
+);
 
 //route for updating an specifin meal plan
-router.put('/update/:meal_plan_id/', handleErrors(updatingMealPlan));
+router.put(
+  '/update/:meal_plan_id/',
+  UpdatemealPlanRules(),
+  checkRulesResults,
+  handleErrors(updatingMealPlan)
+);
 
 //route for delting a meal plan
 router.delete('/delete/:meal_plan_id', handleErrors(deleteMealPlan));

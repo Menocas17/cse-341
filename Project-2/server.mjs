@@ -2,8 +2,10 @@ import express from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
 import { connectDB } from './models/database.mjs';
-import mealsRoutes from './routers/mealsRoutes.mjs';
-import usersRoutes from './routers/usersRoutes.mjs';
+import mealsRoutes from './routes/mealsRoutes.mjs';
+import usersRoutes from './routes/usersRoutes.mjs';
+import swaggerUI from 'swagger-ui-express';
+import swaggerDocumentation from './swagger.json' with { type: 'json' };
 
 dotenv.config();
 const app = express();
@@ -21,7 +23,7 @@ app.get('/', (req, res) => {
 });
 
 //routes
-
+app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocumentation));
 app.use('/users', usersRoutes);
 app.use('/meals', mealsRoutes);
 
