@@ -2,6 +2,8 @@ import express from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
 import { connectDB } from './models/database.mjs';
+import mealsRoutes from './routers/mealsRoutes.mjs';
+import usersRoutes from './routers/usersRoutes.mjs';
 
 dotenv.config();
 const app = express();
@@ -19,6 +21,9 @@ app.get('/', (req, res) => {
 });
 
 //routes
+
+app.use('/users', usersRoutes);
+app.use('/meals', mealsRoutes);
 
 // starting the DB connection and starting the server
 
