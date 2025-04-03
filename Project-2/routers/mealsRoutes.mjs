@@ -1,15 +1,27 @@
 import { Router } from 'express';
+import {
+  getAllMealPlans,
+  getMealPlan,
+  createMealPlan,
+  updatingMealPlan,
+  deleteMealPlan,
+} from '../controllers/mealsController.mjs';
 
 const router = Router();
 
-router.get('/:user_id/get-all-meal-plans');
+//route for get all the meal plans for a user
+router.get('/:user_id/get-all-meal-plans', getAllMealPlans);
 
-router.get('/:meal_plan_id/get-meals');
+// route for get an specific meal plan
+router.get('/:meal_plan_id', getMealPlan);
 
-router.post('/:user_id/create');
+//route for creating a new meal plan for an user
+router.post('/:user_id/create', createMealPlan);
 
-router.put('/update/:meal_plan_id');
+//route for updating an specifin meal plan
+router.put('/update/:meal_plan_id/', updatingMealPlan);
 
-router.delete('/delete/:meal_plan_id');
+//route for delting a meal plan
+router.delete('/delete/:meal_plan_id', deleteMealPlan);
 
 export default router;

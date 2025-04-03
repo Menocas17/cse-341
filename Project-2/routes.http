@@ -1,0 +1,113 @@
+### getting all users 
+
+GET http://localhost:3000/users/get-all-users
+
+### create a ner user 
+POST http://localhost:3000/users/create HTTP/1.1
+Content-Type: application/json
+
+{
+    "name": "Rodolfo",
+    "lastName": "Menocal",
+    "birthday": "2000-01-01",
+    "email": "rodoldfo@memocalcj.com",
+    "phoneNumber": "+505 19763545",
+    "password": "testingPass"
+}
+
+### updating an existing user 
+
+PUT http://localhost:3000/users/update/67ee20ef29bff1ada3a79f25 HTTP/1.1
+Content-Type: application/json
+
+# {
+#     "password": "changingPass2"
+# }
+{
+    "name": "Testing234"
+}
+
+### deleting an user
+
+DELETE http://localhost:3000/users/delete/67eecfaf99372a6498c364d6
+
+
+### getting all the meal plans for an user 
+GET http://localhost:3000/meals/67ee21f429bff1ada3a79f28/get-all-meal-plans
+
+### getting an specific meal plan
+
+GET http://localhost:3000/meals/67eee23761a718529c1f7f2a
+
+### creating a new meal plan for an user 
+
+POST http://localhost:3000/meals/67ee21f429bff1ada3a79f28/create HTTP/1.1
+Content-Type: application/json
+
+{
+  "mealPlan_name": "Balanced Tuesday Meals",
+  "meals": [
+    {
+      "meal_name": "Grilled Chicken Salad",
+      "ingredients": {
+        "grilled chicken breast": "200g",
+        "mixed greens": "1 cup",
+        "cherry tomatoes": "5",
+        "cucumber": "1/2",
+        "avocado": "1/2",
+        "olive oil": "1 tbsp",
+        "balsamic vinegar": "1 tbsp"
+      },
+      "nutrition_info": {
+        "fat": "25g",
+        "protein": "40g",
+        "carbohydrates": "10g",
+        "total_kcal": "800kcal"
+      }
+    },
+    {
+      "meal_name": "Salmon with Quinoa and Steamed Broccoli",
+      "ingredients": {
+        "salmon fillet": "180g",
+        "quinoa": "1/2 cup cooked",
+        "steamed broccoli": "1 cup",
+        "olive oil": "1 tbsp",
+        "lemon": "1 slice"
+      },
+      "nutrition_info": {
+        "fat": "35g",
+        "protein": "45g",
+        "carbohydrates": "30g",
+        "total_kcal": "800kcal"
+      }
+    },
+    {
+      "meal_name": "Vegetable Stir-Fry with Tofu",
+      "ingredients": {
+        "tofu": "150g",
+        "mixed vegetables (carrots, bell peppers, zucchini)": "2 cups",
+        "soy sauce": "2 tbsp",
+        "sesame oil": "1 tbsp",
+        "brown rice": "1/2 cup cooked"
+      },
+      "nutrition_info": {
+        "fat": "22g",
+        "protein": "25g",
+        "carbohydrates": "50g",
+        "total_kcal": "800kcal"
+      }
+    }
+  ]
+}
+
+### updating a meal plan
+PUT http://localhost:3000/meals/update/67eee4200fd4809ff31b9a25 HTTP/1.1
+Content-Type: application/json
+
+{
+  "mealPlan_name": "Tuesday Meals"
+}
+
+
+### deleting a meal plan 
+DELETE http://localhost:3000/meals/delete/67eee3c30fd4809ff31b9a23
