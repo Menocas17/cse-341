@@ -7,7 +7,7 @@
   },
   "host": "cse-341-project-2-cdw3.onrender.com",
   "basePath": "/",
-  "schemes": ["http", "https"],
+  "schemes": ["https"],
   "paths": {
     "/": {
       "get": {

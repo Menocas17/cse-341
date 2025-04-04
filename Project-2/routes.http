@@ -10,7 +10,7 @@ Content-Type: application/json
     "name": "Rodolfo",
     "lastName": "Menocal",
     "birthday": "2000-01-01",
-    "email": "rodoldfo@gmail.com",
+    "email": "rodoldfo17@gmail.com",
     "phoneNumber": "505 769028",
     "password": "testingPass17!"
 }
