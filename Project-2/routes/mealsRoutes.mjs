@@ -10,8 +10,8 @@ import {
   mealPlanRules,
   UpdatemealPlanRules,
   checkRulesResults,
-} from '../utilities/validators.mjs';
-import { handleErrors } from '../utilities/handleErrors.mjs';
+} from '../middlewares/validators.mjs';
+import { handleErrors } from '../middlewares/handleErrors.mjs';
 
 const router = Router();
 

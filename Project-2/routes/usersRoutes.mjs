@@ -9,13 +9,21 @@ import {
   newUserRules,
   UpdateUserRules,
   checkRulesResults,
-} from '../utilities/validators.mjs';
-import { handleErrors } from '../utilities/handleErrors.mjs';
+} from '../middlewares/validators.mjs';
+import { userLogin, userLogout } from '../controllers/loginController.mjs';
+import { loginProtection } from '../middlewares/authentication.mjs';
+import { restrictTo } from '../middlewares/authorization.mjs';
+import { handleErrors } from '../middlewares/handleErrors.mjs';
 
 const router = Router();
 
 // route for getting all the users, this is going to be used by the admin
-router.get('/get-all-users', handleErrors(getAllUsers));
+router.get(
+  '/get-all-users',
+  loginProtection,
+  restrictTo('admin'),
+  handleErrors(getAllUsers)
+);
 
 // router for creating a new user
 router.post(
@@ -25,10 +33,12 @@ router.post(
   handleErrors(createUser)
 );
 
-// route for login (we are going to add this in the future)
-router.post('/log-in', (req, res) => {
-  res.json({ message: 'This route is working ok' });
-});
+// route for login
+router.post('/log-in', userLogin);
+
+//route for log out
+
+router.post('/log-out', userLogout);
 
 //route for updating the users details
 router.put(

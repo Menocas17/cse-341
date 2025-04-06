@@ -21,7 +21,8 @@ export async function getAllUsers(req, res, next) {
 // creating a new user in the database
 
 export async function createUser(req, res, next) {
-  const { name, lastName, birthday, email, phoneNumber, password } = req.body;
+  const { name, lastName, birthday, email, phoneNumber, password, role } =
+    req.body;
 
   const hashedPassword = await bcrypt.hash(password, 10);
 
@@ -33,10 +34,13 @@ export async function createUser(req, res, next) {
       email,
       phoneNumber,
       hashedPassword,
+      role,
     });
 
     await newUser.save();
-    res.status(201).json({ message: `New user ${name} ${lastName} created!!` });
+    res
+      .status(201)
+      .json({ message: `New user ${name} ${lastName} created!!`, newUser });
   } catch (error) {
     next(error);
   }
