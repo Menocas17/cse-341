@@ -2,374 +2,368 @@
   "swagger": "2.0",
   "info": {
     "title": "Meal Planner API for the CSE341 project",
-    "description": "This API allows you to create and manage meal plans as a user and to manage users as an admin.",
+    "description": "This API allows you to create and manage meal plans as an user and to manage user as an admin",
     "version": "1.0.0"
   },
   "host": "cse-341-project-2-cdw3.onrender.com",
   "basePath": "/",
-  "schemes": ["http", "https"],
+  "schemes": ["https"],
   "paths": {
     "/": {
       "get": {
-        "description": "Welcome endpoint for the API.",
+        "description": "This is the base index path, in this path you are goint to get a descriptive message of what the api does",
         "responses": {
           "200": {
-            "description": "API is running successfully."
+            "description": "OK"
           }
         }
       }
     },
     "/users/get-all-users": {
       "get": {
-        "description": "Retrieve a list of all users. Requires admin authorization.",
-        "parameters": [
-          {
-            "name": "authorization",
-            "in": "header",
-            "type": "string",
-            "required": true,
-            "description": "Bearer token for admin authentication."
-          }
-        ],
+        "description": "This endpoint will get a list of all the users, in the databse, this endpoint is meant to be use only for admins in future updates",
         "responses": {
-          "200": {
-            "description": "List of users retrieved successfully."
-          },
-          "401": {
-            "description": "Unauthorized. Invalid or missing token."
-          },
-          "403": {
-            "description": "Forbidden. User does not have admin privileges."
+          "default": {
+            "description": ""
           }
         }
       }
     },
     "/users/create": {
       "post": {
-        "description": "Create a new user.",
+        "description": "This endpoint will create a new user in the data base",
         "parameters": [
           {
             "name": "body",
             "in": "body",
-            "required": true,
             "schema": {
               "type": "object",
               "properties": {
-                "username": {
-                  "type": "string"
+                "name": {
+                  "example": "AnyTest"
+                },
+                "lastName": {
+                  "example": "AnyTest"
+                },
+                "birthday": {
+                  "example": "2000-01-01"
                 },
                 "email": {
-                  "type": "string"
+                  "example": "avalidemail@email.com"
+                },
+                "phoneNumber": {
+                  "example": "505 12345678"
                 },
                 "password": {
-                  "type": "string"
+                  "example": "TestingPassword17!"
                 }
-              },
-              "required": ["username", "email", "password"]
-            },
-            "description": "User details for creating a new account."
+              }
+            }
           }
         ],
         "responses": {
           "201": {
-            "description": "User created successfully."
+            "description": "Created"
           },
           "400": {
-            "description": "Bad Request. Missing or invalid fields."
-          }
-        }
-      }
-    },
-    "/users/log-in": {
-      "post": {
-        "description": "Log in a user and retrieve a token.",
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "type": "object",
-              "properties": {
-                "email": {
-                  "type": "string"
-                },
-                "password": {
-                  "type": "string"
-                }
-              },
-              "required": ["email", "password"]
-            },
-            "description": "User credentials for logging in."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Login successful. Token returned."
-          },
-          "401": {
-            "description": "Unauthorized. Invalid credentials."
+            "description": "Bad Request"
           }
         }
       }
     },
     "/users/auth/google": {
       "get": {
-        "description": "Initiate Google OAuth authentication.",
-        "responses": {
-          "302": {
-            "description": "Redirect to Google OAuth."
-          }
-        }
-      }
-    },
-    "/users/auth/google/callback": {
-      "get": {
-        "description": "Handle Google OAuth callback.",
+        "description": "This endpoint will redirect you to the google login page",
         "responses": {
           "200": {
-            "description": "Authentication successful. User logged in."
-          },
-          "400": {
-            "description": "Bad Request. Invalid or missing callback parameters."
-          }
-        }
-      }
-    },
-    "/users/home-panel": {
-      "get": {
-        "description": "Retrieve the home panel data for the logged-in user.",
-        "parameters": [
-          {
-            "name": "authorization",
-            "in": "header",
-            "type": "string",
-            "required": true,
-            "description": "Bearer token for user authentication."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Home panel data retrieved successfully."
-          },
-          "401": {
-            "description": "Unauthorized. Invalid or missing token."
-          }
-        }
-      }
-    },
-    "/users/log-out": {
-      "post": {
-        "description": "Log out the current user.",
-        "responses": {
-          "200": {
-            "description": "User logged out successfully."
+            "description": "OK"
           }
         }
       }
     },
     "/users/update/{user_id}": {
       "put": {
-        "description": "Update user details.",
+        "description": "This endpoint will update an user, you can update all the info or just specific info",
         "parameters": [
           {
             "name": "user_id",
             "in": "path",
             "required": true,
-            "type": "string",
-            "description": "ID of the user to update."
+            "type": "string"
           },
           {
             "name": "body",
             "in": "body",
-            "required": true,
             "schema": {
               "type": "object",
               "properties": {
-                "username": {
-                  "type": "string"
+                "name": {
+                  "example": "AnyTest"
+                },
+                "lastName": {
+                  "example": "AnyTest"
+                },
+                "birthday": {
+                  "example": "2000-01-01"
                 },
                 "email": {
-                  "type": "string"
+                  "example": "avalidemail@email.com"
+                },
+                "phoneNumber": {
+                  "example": "505 12345678"
+                },
+                "password": {
+                  "example": "TestingPassword17!"
                 }
               }
-            },
-            "description": "Fields to update for the user."
+            }
           }
         ],
         "responses": {
-          "200": {
-            "description": "User updated successfully."
+          "404": {
+            "description": "user not found"
           },
-          "400": {
-            "description": "Bad Request. Invalid or missing fields."
+          "200": {
+            "description": "updated"
           }
         }
       }
     },
     "/users/delete/{user_id}": {
       "delete": {
-        "description": "Delete a user by ID.",
+        "description": "This endpoint is for deleting an user from the database",
         "parameters": [
           {
             "name": "user_id",
             "in": "path",
             "required": true,
-            "type": "string",
-            "description": "ID of the user to delete."
+            "type": "string"
           }
         ],
         "responses": {
-          "200": {
-            "description": "User deleted successfully."
-          },
           "404": {
-            "description": "User not found."
+            "description": "user not found"
+          },
+          "200": {
+            "description": "deleted"
           }
         }
       }
     },
     "/meals/{user_id}/get-all-meal-plans": {
       "get": {
-        "description": "Retrieve all meal plans for a specific user.",
+        "description": "This endpoint will get you all the meal plans for an specific user",
         "parameters": [
           {
             "name": "user_id",
             "in": "path",
             "required": true,
-            "type": "string",
-            "description": "ID of the user whose meal plans are being retrieved."
+            "type": "string"
           }
         ],
         "responses": {
-          "200": {
-            "description": "Meal plans retrieved successfully."
-          },
-          "404": {
-            "description": "User not found."
+          "default": {
+            "description": ""
           }
         }
       }
     },
     "/meals/{meal_plan_id}": {
       "get": {
-        "description": "Retrieve details of a specific meal plan.",
+        "description": "This endpoint will get and specific meal plan by id",
         "parameters": [
           {
             "name": "meal_plan_id",
             "in": "path",
             "required": true,
-            "type": "string",
-            "description": "ID of the meal plan to retrieve."
+            "type": "string"
           }
         ],
         "responses": {
-          "200": {
-            "description": "Meal plan details retrieved successfully."
-          },
-          "404": {
-            "description": "Meal plan not found."
+          "default": {
+            "description": ""
           }
         }
       }
     },
     "/meals/{user_id}/create": {
       "post": {
-        "description": "Create a new meal plan for a user.",
+        "description": "You can use this endpoint for creating a new meal plan for an user",
         "parameters": [
           {
             "name": "user_id",
             "in": "path",
             "required": true,
-            "type": "string",
-            "description": "ID of the user for whom the meal plan is being created."
+            "type": "string"
           },
           {
             "name": "body",
             "in": "body",
-            "required": true,
             "schema": {
               "type": "object",
               "properties": {
-                "name": {
-                  "type": "string"
+                "mealPlan_name": {
+                  "type": "string",
+                  "example": "Balanced Tuesday Meals"
                 },
-                "description": {
-                  "type": "string"
+                "meals": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "meal_name": {
+                        "type": "string",
+                        "example": "Grilled Chicken Salad"
+                      },
+                      "ingredients": {
+                        "type": "object",
+                        "additionalProperties": {
+                          "type": "string"
+                        },
+                        "example": {
+                          "grilled chicken breast": "200g",
+                          "mixed greens": "1 cup",
+                          "cherry tomatoes": "5",
+                          "cucumber": "1/2",
+                          "avocado": "1/2",
+                          "olive oil": "1 tbsp",
+                          "balsamic vinegar": "1 tbsp"
+                        }
+                      },
+                      "nutrition_info": {
+                        "type": "object",
+                        "properties": {
+                          "fat": {
+                            "type": "string",
+                            "example": "25g"
+                          },
+                          "protein": {
+                            "type": "string",
+                            "example": "40g"
+                          },
+                          "carbohydrates": {
+                            "type": "string",
+                            "example": "10g"
+                          },
+                          "total_kcal": {
+                            "type": "string",
+                            "example": "800kcal"
+                          }
+                        }
+                      }
+                    }
+                  }
                 }
-              },
-              "required": ["name", "description"]
-            },
-            "description": "Details of the meal plan to create."
+              }
+            }
           }
         ],
         "responses": {
-          "201": {
-            "description": "Meal plan created successfully."
+          "404": {
+            "description": "Bad Request"
           },
-          "400": {
-            "description": "Bad Request. Missing or invalid fields."
+          "201": {
+            "description": "created"
           }
         }
       }
     },
     "/meals/update/{meal_plan_id}/": {
       "put": {
-        "description": "Update a specific meal plan.",
+        "description": "With this endpoint you can update a meal plan for an user",
         "parameters": [
           {
             "name": "meal_plan_id",
             "in": "path",
             "required": true,
-            "type": "string",
-            "description": "ID of the meal plan to update."
+            "type": "string"
           },
           {
             "name": "body",
             "in": "body",
-            "required": true,
             "schema": {
               "type": "object",
               "properties": {
-                "name": {
-                  "type": "string"
+                "mealPlan_name": {
+                  "type": "string",
+                  "example": "Balanced Tuesday Meals"
                 },
-                "description": {
-                  "type": "string"
+                "meals": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "meal_name": {
+                        "type": "string",
+                        "example": "Grilled Chicken Salad"
+                      },
+                      "ingredients": {
+                        "type": "object",
+                        "additionalProperties": {
+                          "type": "string"
+                        },
+                        "example": {
+                          "grilled chicken breast": "200g",
+                          "mixed greens": "1 cup",
+                          "cherry tomatoes": "5",
+                          "cucumber": "1/2",
+                          "avocado": "1/2",
+                          "olive oil": "1 tbsp",
+                          "balsamic vinegar": "1 tbsp"
+                        }
+                      },
+                      "nutrition_info": {
+                        "type": "object",
+                        "properties": {
+                          "fat": {
+                            "type": "string",
+                            "example": "25g"
+                          },
+                          "protein": {
+                            "type": "string",
+                            "example": "40g"
+                          },
+                          "carbohydrates": {
+                            "type": "string",
+                            "example": "10g"
+                          },
+                          "total_kcal": {
+                            "type": "string",
+                            "example": "800kcal"
+                          }
+                        }
+                      }
+                    }
+                  }
                 }
               }
-            },
-            "description": "Fields to update for the meal plan."
+            }
           }
         ],
         "responses": {
-          "200": {
-            "description": "Meal plan updated successfully."
+          "404": {
+            "description": "Bad Request"
           },
-          "400": {
-            "description": "Bad Request. Invalid or missing fields."
+          "200": {
+            "description": "updated"
           }
         }
       }
     },
     "/meals/delete/{meal_plan_id}": {
       "delete": {
-        "description": "Delete a specific meal plan.",
+        "description": "Use this endpoint for deleting an entire meal plan for an user",
         "parameters": [
           {
             "name": "meal_plan_id",
             "in": "path",
             "required": true,
-            "type": "string",
-            "description": "ID of the meal plan to delete."
+            "type": "string"
           }
         ],
         "responses": {
-          "200": {
-            "description": "Meal plan deleted successfully."
-          },
-          "404": {
-            "description": "Meal plan not found."
+          "default": {
+            "description": ""
           }
         }
       }
