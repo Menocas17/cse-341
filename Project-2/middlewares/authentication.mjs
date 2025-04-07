@@ -1,5 +1,6 @@
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
+import passport from 'passport';
 import { userModel } from '../models/usersModels.mjs';
 
 dotenv.config();

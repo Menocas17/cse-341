@@ -7,6 +7,8 @@ const userSchema = new mongoose.Schema({
   email: { type: String, unique: true },
   phoneNumber: String,
   hashedPassword: String,
+  googleId: String,
+  photo: String,
   role: {
     type: String,
     enum: ['user', 'admin'],

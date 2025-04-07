@@ -11,6 +11,7 @@ export function newUserRules() {
       .withMessage('A valid emial is required'),
 
     body('birthday')
+      .optional()
       .trim()
       .matches(/^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/)
       .withMessage('The birthday has to be in the following format: YYYY-MM-DD')
@@ -35,9 +36,10 @@ export function newUserRules() {
       .isAlpha()
       .withMessage('Name must contain only Alpha letters'),
 
-    body('phoneNumber').isMobilePhone('any', { strictMode: false }),
+    body('phoneNumber').isMobilePhone('any', { strictMode: false }).optional(),
 
     body('password')
+      .optional()
       .isLength({ min: 8 })
       .withMessage('Password must be at least 8 characters long')
       .matches(/[A-Z]/)

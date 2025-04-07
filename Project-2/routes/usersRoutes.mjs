@@ -10,10 +10,15 @@ import {
   UpdateUserRules,
   checkRulesResults,
 } from '../middlewares/validators.mjs';
-import { userLogin, userLogout } from '../controllers/loginController.mjs';
+import {
+  localLogin,
+  userLogout,
+  googleCallback,
+} from '../controllers/loginController.mjs';
 import { loginProtection } from '../middlewares/authentication.mjs';
 import { restrictTo } from '../middlewares/authorization.mjs';
 import { handleErrors } from '../middlewares/handleErrors.mjs';
+import passport from 'passport';
 
 const router = Router();
 
@@ -35,6 +40,28 @@ router.post(
 
 // route for login
 router.post('/log-in', userLogin);
+
+//Google Oauth
+router.get(
+  '/auth/google',
+  passport.authenticate('google', { scope: ['profile', 'email'] })
+);
+
+//Goole Oauth callback
+
+router.get(
+  '/auth/goole/callback',
+  passport.authenticate('google', {
+    session: false,
+    failureRedirect: '/log-in',
+  }),
+  googleCallback
+);
+
+//base home route for testing google Oauth
+app.get('/home-panel', (req, res) => {
+  res.status(200).json({ message: 'You are logged in with Google' });
+});
 
 //route for log out
 
