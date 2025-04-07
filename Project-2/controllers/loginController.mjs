@@ -61,14 +61,14 @@ export async function localLogin(req, res, next) {
 
 //creating the google callback
 export function googleCallback(req, res) {
-  const token = createToken(user);
+  const token = createToken(req.user);
   res.cookie('access_tokes', token, {
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production',
     maxAge: 7200000,
   });
 
-  res.redirect('/home-panel');
+  res.redirect('/users/home-panel');
 }
 
 export function userLogout(req, res, next) {
