@@ -6,6 +6,8 @@ import mealsRoutes from './routes/mealsRoutes.mjs';
 import usersRoutes from './routes/usersRoutes.mjs';
 import swaggerUI from 'swagger-ui-express';
 import swaggerDocumentation from './swagger.json' with { type: 'json' };
+import passport from 'passport';
+import './config/passport.mjs';
 
 dotenv.config();
 const app = express();

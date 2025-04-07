@@ -47,7 +47,7 @@ router.get(
   passport.authenticate('google', { scope: ['profile', 'email'] })
 );
 
-//Goole Oauth callback
+//Google Oauth callback
 
 router.get(
   '/auth/goole/callback',

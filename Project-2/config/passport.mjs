@@ -5,26 +5,31 @@ import bcrypt from 'bcrypt';
 import { userModel } from '../models/usersModels.mjs';
 
 passport.use(
-  new localStrategy({
-    usernameField: 'email',
-  }),
-  async (email, password, done) => {
-    try {
-      const user = await userModel.findOne({ email });
-      if (!user) {
-        return done(null, false, { message: 'Email not found' });
-      }
+  new localStrategy(
+    {
+      usernameField: 'email',
+    },
+    async (email, password, done) => {
+      try {
+        const user = await userModel.findOne({ email });
+        if (!user) {
+          return done(null, false, { message: 'Email not found' });
+        }
 
-      const verifiedPass = await bcrypt.compare(password, user.hashedPassword);
-      if (!verifiedPass) {
-        return done(null, false, { message: 'Invalid password' });
-      }
+        const verifiedPass = await bcrypt.compare(
+          password,
+          user.hashedPassword
+        );
+        if (!verifiedPass) {
+          return done(null, false, { message: 'Invalid password' });
+        }
 
-      return done(null, user);
-    } catch (error) {
-      return done(error);
+        return done(null, user);
+      } catch (error) {
+        return done(error);
+      }
     }
-  }
+  )
 );
 
 passport.use(
@@ -64,3 +69,5 @@ passport.serializeUser((user, done) => {
 passport.deserializeUser((id, done) => {
   User.findById(id).then((user) => done(null, user));
 });
+
+export default passport;
