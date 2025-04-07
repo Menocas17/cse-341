@@ -29,6 +29,16 @@
         }
       }
     },
+    "/users/log-out": {
+      "post": {
+        "description": "This endpoint will log out the user and delete the JWT token",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
     "/users/create": {
       "post": {
         "description": "This endpoint will create a new user in the data base",
