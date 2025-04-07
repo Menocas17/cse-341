@@ -39,7 +39,7 @@ router.post(
 );
 
 // route for login
-router.post('/log-in', userLogin);
+router.post('/log-in', localLogin);
 
 //Google Oauth
 router.get(
@@ -59,7 +59,7 @@ router.get(
 );
 
 //base home route for testing google Oauth
-app.get('/home-panel', (req, res) => {
+router.get('/home-panel', (req, res) => {
   res.status(200).json({ message: 'You are logged in with Google' });
 });
 
