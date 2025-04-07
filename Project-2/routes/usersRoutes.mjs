@@ -65,12 +65,13 @@ router.post('/log-out', userLogout);
 //route for updating the users details
 router.put(
   '/update/:user_id',
+  loginProtection,
   UpdateUserRules(),
   checkRulesResults,
   handleErrors(updatingUser)
 );
 
 //route for deleting an user
-router.delete('/delete/:user_id', handleErrors(deletingUser));
+router.delete('/delete/:user_id', loginProtection, handleErrors(deletingUser));
 
 export default router;

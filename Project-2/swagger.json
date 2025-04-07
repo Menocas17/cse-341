@@ -83,7 +83,7 @@
     },
     "/users/auth/google": {
       "get": {
-        "description": "This endpoint will redirect you to the google login page",
+        "description": "This endpoint will redirect you to the google login page. DO NOT EXECUTE THIS ENDPOINT IN SWAGGER, IT WILL NOT WORK",
         "responses": {
           "200": {
             "description": "OK"
