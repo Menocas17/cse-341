@@ -50,7 +50,7 @@ router.get(
 //Google Oauth callback
 
 router.get(
-  '/auth/goole/callback',
+  '/auth/google/callback',
   passport.authenticate('google', {
     session: false,
     failureRedirect: '/log-in',
