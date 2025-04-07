@@ -1,38 +1,11 @@
 import passport from 'passport';
 import { Strategy as googleStrategy } from 'passport-google-oauth20';
-import { Strategy as localStrategy } from 'passport-local';
-import bcrypt from 'bcrypt';
 import { userModel } from '../models/usersModels.mjs';
+import dotenv from 'dotenv';
+dotenv.config();
 
 passport.use(
-  new localStrategy(
-    {
-      usernameField: 'email',
-    },
-    async (email, password, done) => {
-      try {
-        const user = await userModel.findOne({ email });
-        if (!user) {
-          return done(null, false, { message: 'Email not found' });
-        }
-
-        const verifiedPass = await bcrypt.compare(
-          password,
-          user.hashedPassword
-        );
-        if (!verifiedPass) {
-          return done(null, false, { message: 'Invalid password' });
-        }
-
-        return done(null, user);
-      } catch (error) {
-        return done(error);
-      }
-    }
-  )
-);
-
-passport.use(
+  'google',
   new googleStrategy(
     {
       clientID: process.env.GOOGLE_CLIENT_ID,
@@ -53,6 +26,9 @@ passport.use(
             googleId: profile.id,
             photo: profile.photos[0].value,
           });
+        }
+
+        if (user.role === 'admin') {
         }
 
         return done(null, user);

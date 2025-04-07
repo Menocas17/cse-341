@@ -11,7 +11,7 @@ import {
   checkRulesResults,
 } from '../middlewares/validators.mjs';
 import {
-  localLogin,
+  homePanel,
   userLogout,
   googleCallback,
 } from '../controllers/loginController.mjs';
@@ -38,9 +38,6 @@ router.post(
   handleErrors(createUser)
 );
 
-// route for login
-router.post('/log-in', localLogin);
-
 //Google Oauth
 router.get(
   '/auth/google',
@@ -59,9 +56,7 @@ router.get(
 );
 
 //base home route for testing google Oauth
-router.get('/home-panel', (req, res) => {
-  res.status(200).json({ message: 'You are logged in with Google' });
-});
+router.get('/home-panel', homePanel);
 
 //route for log out
 

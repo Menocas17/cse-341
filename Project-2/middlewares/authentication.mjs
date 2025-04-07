@@ -6,11 +6,9 @@ import { userModel } from '../models/usersModels.mjs';
 dotenv.config();
 
 export async function loginProtection(req, res, next) {
-  const token = req.headers.authorization?.split(' ')[1];
+  const token = req.cookies.access_token;
   if (!token) {
-    return res
-      .status(401)
-      .json({ message: 'Not authorize, log in to your account' });
+    return res.status(401).json({ message: 'Not authorized' });
   }
 
   try {

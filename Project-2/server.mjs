@@ -8,6 +8,7 @@ import swaggerUI from 'swagger-ui-express';
 import swaggerDocumentation from './swagger.json' with { type: 'json' };
 import passport from 'passport';
 import './config/passport.mjs';
+import cookieParser from 'cookie-parser';
 
 dotenv.config();
 const app = express();
@@ -16,6 +17,8 @@ const port = process.env.PORT || 3000;
 //middlewares
 app.use(express.json());
 app.use(cors());
+app.use(cookieParser());
+app.use(passport.initialize());
 
 //base index route
 app.get('/', (req, res) => {
