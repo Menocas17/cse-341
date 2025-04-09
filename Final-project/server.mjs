@@ -10,6 +10,7 @@ import cookieParser from 'cookie-parser';
 import passport from 'passport';
 import swaggerUI from 'swagger-ui-express';
 import swaggerDocumentation from './swagger.json' with { type: 'json' };
+import { errorMiddleware } from './middlewares/handleErrors.mjs';
 
 dotenv.config();
 const app = express();
@@ -41,13 +42,7 @@ app.use(async (req, res, next) => {
 
 // error handeling middleware
 
-app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(err.status || 500).json({
-    message: err.message || 'Internal server error',
-    status: err.status || 500,
-  });
-});
+app.use(errorMiddleware());
 
 // starting the DB connection and starting the server
 
