@@ -1,10 +1,15 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
-import productsRoutes from './routers/products.mjs';
-import cartsRoutes from './routers/cart.mjs';
-import usersRoutes from './routers/users.mjs';
+import cartsRoutes from './routes/cart.mjs';
+import usersRoutes from './routes/users.mjs';
+import productsRoutes from './routes/products.mjs';
+import reviewsRoutes from './routes/reviews.mjs';
 import { connectDB } from './models/database.mjs';
+import cookieParser from 'cookie-parser';
+import passport from 'passport';
+import swaggerUI from 'swagger-ui-express';
+import swaggerDocumentation from './swagger.json' with { type: 'json' };
 
 dotenv.config();
 const app = express();
@@ -13,6 +18,8 @@ const port = process.env.PORT || 3000;
 //middlewares
 app.use(express.json());
 app.use(cors());
+app.use(cookieParser());
+app.use(passport.initialize());
 
 //base index route
 app.get('/', (req, res) => {
@@ -25,6 +32,22 @@ app.get('/', (req, res) => {
 app.use('/products', productsRoutes);
 app.use('/carts', cartsRoutes);
 app.use('/users', usersRoutes);
+app.use('/reviews', reviewsRoutes);
+
+// route for handle not defines routes
+app.use(async (req, res, next) => {
+  next({ status: 404, message: 'Sorry, we appear to have lost that page.' });
+});
+
+// error handeling middleware
+
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(err.status || 500).json({
+    message: err.message || 'Internal server error',
+    status: err.status || 500,
+  });
+});
 
 // starting the DB connection and starting the server
 
