@@ -13,6 +13,11 @@ import {
 } from '../controllers/loginController.mjs';
 import { restrictTo } from '../middlewares/authorization.mjs';
 import { loginProtection } from '../middlewares/authenticaction.mjs';
+import {
+  userValidationRules,
+  checkRulesResults,
+  loginValidationRules,
+} from '../middlewares/validations.mjs';
 import passport from 'passport';
 const router = Router();
 
@@ -21,20 +26,37 @@ const router = Router();
 router.get('/get-all', loginProtection, restrictTo('admin'), getAllUsers);
 
 //register a new user route
-router.post('/register', registerUser);
+router.post(
+  '/register',
+  userValidationRules(),
+  checkRulesResults,
+  registerUser
+);
 
 //edit user account
-router.put('/editAccount/:user_id', loginProtection, editingAccount);
+router.put(
+  '/editAccount/:user_id',
+  userValidationRules(true),
+  checkRulesResults,
+  loginProtection,
+  editingAccount
+);
 
 //delete an user account
 
-router.delete('/delete/:user_id', loginProtection, deleteAccount);
+router.delete(
+  '/delete/:user_id',
+  userValidationRules(),
+  checkRulesResults,
+  loginProtection,
+  deleteAccount
+);
 
 //route for process the local login
 router.post('/login', localLogin);
 
 //rooute for the log out
-router.post('/log-out', userLogout);
+router.post('/log-out', loginValidationRules(), checkRulesResults, userLogout);
 
 //Google Oauth
 router.get(

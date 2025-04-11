@@ -6,6 +6,10 @@ import {
   updateProduct,
   deleteProduct,
 } from '../controllers/productsController.mjs';
+import {
+  ProductValidationRules,
+  checkRulesResults,
+} from '../middlewares/validations.mjs';
 const router = Router();
 
 //getting all products route
@@ -15,10 +19,20 @@ router.get('/', getAllProducts);
 router.get('/:product_id', productById);
 
 //Creating a new product
-router.post('/create', createProduct);
+router.post(
+  '/create',
+  ProductValidationRules(),
+  checkRulesResults,
+  createProduct
+);
 
 //updating product by id
-router.put('/update/:product_id', updateProduct);
+router.put(
+  '/update/:product_id',
+  ProductValidationRules(),
+  checkRulesResults,
+  updateProduct
+);
 
 //deleting product by id
 

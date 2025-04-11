@@ -5,6 +5,7 @@ import { reviewModel } from '../models/reviewModel.mjs';
 export async function createReview(req, res, next) {
   const { product_id } = req.params;
   const { user_id, review_rating, review_text } = req.body;
+  console.log(product_id);
 
   try {
     const newReview = new reviewModel({
