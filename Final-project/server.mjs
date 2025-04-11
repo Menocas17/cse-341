@@ -9,7 +9,7 @@ import { connectDB } from './models/database.mjs';
 import cookieParser from 'cookie-parser';
 import passport from 'passport';
 import swaggerUI from 'swagger-ui-express';
-import swaggerDocumentation from './swagger.json' with { type: 'json' };
+// import swaggerDocumentation from './swagger.json' with { type: 'json' };
 import { errorMiddleware } from './middlewares/handleErrors.mjs';
 
 dotenv.config();
@@ -42,7 +42,7 @@ app.use(async (req, res, next) => {
 
 // error handeling middleware
 
-app.use(errorMiddleware());
+app.use(errorMiddleware);
 
 // starting the DB connection and starting the server
 

@@ -3,8 +3,14 @@ import {
   editingAccount,
   registerUser,
   deleteAccount,
+  getAllUsers,
 } from '../controllers/userController.mjs';
+import { get } from 'mongoose';
 const router = Router();
+
+//getting all the users in the data base: meant for admins only
+
+router.get('/get-all', getAllUsers);
 
 //register a new user route
 router.post('/register', registerUser);

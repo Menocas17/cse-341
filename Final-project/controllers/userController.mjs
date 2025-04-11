@@ -86,3 +86,23 @@ export async function deleteAccount(req, res, next) {
     next(err);
   }
 }
+
+//getting all the users in the data base
+
+export async function getAllUsers(req, res, next) {
+  try {
+    const allUsers = await userModel.find({});
+
+    if (allUsers.length === 0) {
+      return res
+        .status(404)
+        .json({
+          message: 'Sorry looks like there is no users in the database',
+        });
+    }
+
+    res.status(200).json(allUsers);
+  } catch (err) {
+    next(err);
+  }
+}
