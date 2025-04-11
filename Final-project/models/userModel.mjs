@@ -10,6 +10,8 @@ const userSchema = new mongoose.Schema({
   user_email: { type: String, unique: true },
   hashedPassword: String,
   user_phone_number: String,
+  googleId: String,
+  photo: String,
   role: {
     type: String,
     default: 'user',
