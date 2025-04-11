@@ -19,12 +19,12 @@ passport.use(
         let user = await userModel.findOne({ googleId: profile.id });
         if (!user) {
           const fullName = profile.displayName.split(' ');
-          const name = fullName[0];
-          const lastName = fullName[1];
+          const user_name = fullName[0];
+          const user_lastName = fullName[1];
           user = await userModel.create({
-            name,
-            lastName,
-            email: profile.emails[0].value,
+            user_name,
+            user_lastName,
+            user_email: profile.emails[0].value,
             googleId: profile.id,
             photo: profile.photos[0].value,
           });

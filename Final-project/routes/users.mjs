@@ -11,22 +11,24 @@ import {
   userLogout,
   homePanel,
 } from '../controllers/loginController.mjs';
+import { restrictTo } from '../middlewares/authorization.mjs';
+import { loginProtection } from '../middlewares/authenticaction.mjs';
 import passport from 'passport';
 const router = Router();
 
 //getting all the users in the data base: meant for admins only
 
-router.get('/get-all', getAllUsers);
+router.get('/get-all', loginProtection, restrictTo('admin'), getAllUsers);
 
 //register a new user route
 router.post('/register', registerUser);
 
 //edit user account
-router.put('/editAccount/:user_id', editingAccount);
+router.put('/editAccount/:user_id', loginProtection, editingAccount);
 
 //delete an user account
 
-router.delete('/delete/:user_id', deleteAccount);
+router.delete('/delete/:user_id', loginProtection, deleteAccount);
 
 //route for process the local login
 router.post('/login', localLogin);
@@ -46,7 +48,7 @@ router.get(
   '/auth/google/callback',
   passport.authenticate('google', {
     session: false,
-    failureRedirect: '/log-in',
+    failureRedirect: '/login',
   }),
   googleCallback
 );
