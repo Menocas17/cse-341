@@ -2,6 +2,7 @@ import passport from 'passport';
 import { Strategy as googleStrategy } from 'passport-google-oauth20';
 import { Strategy as localStrategy } from 'passport-local';
 import { userModel } from '../models/userModel.mjs';
+import bcrypt from 'bcrypt';
 import dotenv from 'dotenv';
 dotenv.config();
 
@@ -41,9 +42,9 @@ passport.use(
   'local',
   new localStrategy(
     { usernameField: 'user_email' },
-    async (email, password, done) => {
+    async (user_email, password, done) => {
       try {
-        const user = await userModel.findOne({ email });
+        const user = await userModel.findOne({ user_email });
         if (!user)
           return done(null, false, {
             message: 'No user registeres with the provided email',

@@ -8,7 +8,7 @@ import reviewsRoutes from './routes/reviews.mjs';
 import { connectDB } from './models/database.mjs';
 import cookieParser from 'cookie-parser';
 import passport from 'passport';
-// import './config/passport.mjs';
+import './config/passport.mjs';
 import swaggerUI from 'swagger-ui-express';
 // import swaggerDocumentation from './swagger.json' with { type: 'json' };
 import { errorMiddleware } from './middlewares/handleErrors.mjs';
