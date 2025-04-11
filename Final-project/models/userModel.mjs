@@ -8,9 +8,14 @@ const userSchema = new mongoose.Schema({
   user_birthday: Date,
   user_address: String,
   user_email: { type: String, unique: true },
-  user_password: String,
+  hashedPassword: String,
   user_phone_number: String,
-  user_type: { type: String, default: 'user' },
+  role: {
+    type: String,
+    default: 'user',
+    enum: ['user', 'admin'],
+    required: true,
+  },
   cart_id: { type: ObjectId, default: null },
 });
 

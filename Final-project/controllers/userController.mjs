@@ -1,4 +1,5 @@
 import { userModel } from '../models/userModel.mjs';
+import bcrypt from 'bcrypt';
 
 //registering new users
 
@@ -9,9 +10,13 @@ export async function registerUser(req, res, next) {
     user_birthday,
     user_address,
     user_email,
-    user_password,
+    password,
     user_phone_number,
+    role,
   } = req.body;
+
+  const hashedPassword = await bcrypt.hash(password, 10);
+
   try {
     const newUser = new userModel({
       user_name,
@@ -19,14 +24,15 @@ export async function registerUser(req, res, next) {
       user_birthday,
       user_address,
       user_email,
-      user_password,
+      hashedPassword,
       user_phone_number,
+      role,
     });
 
     await newUser.save();
     res.status(201).json({
       message: `New user ${newUser.user_name} ${newUser.user_lastName} created successfully`,
-      user_id: newUser._id,
+      user: newUser,
     });
   } catch (err) {
     next(err);
@@ -94,11 +100,9 @@ export async function getAllUsers(req, res, next) {
     const allUsers = await userModel.find({});
 
     if (allUsers.length === 0) {
-      return res
-        .status(404)
-        .json({
-          message: 'Sorry looks like there is no users in the database',
-        });
+      return res.status(404).json({
+        message: 'Sorry looks like there is no users in the database',
+      });
     }
 
     res.status(200).json(allUsers);
