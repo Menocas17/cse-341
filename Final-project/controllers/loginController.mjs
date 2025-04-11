@@ -1,6 +1,7 @@
 import passport from 'passport';
 import dotenv from 'dotenv';
 import { createToken } from '../utilities/tokenGenerator.mjs';
+import jwt from 'jsonwebtoken';
 
 dotenv.config();
 
