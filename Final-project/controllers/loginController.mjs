@@ -68,7 +68,7 @@ export function homePanel(req, res, next) {
     }
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     console.log(decoded);
-    const username = decoded.user_name;
+    const username = decoded.name;
     const userRole = decoded.role;
 
     if (userRole === 'admin') {

@@ -18,7 +18,9 @@ const router = Router();
 router.get('/', getAllProducts);
 
 //getting product by id
-router.get('/:product_id', productById);
+router.get('/:product_id', (req, res, next) => {
+  productById(req, res, next);
+});
 
 //Creating a new product
 router.post(
