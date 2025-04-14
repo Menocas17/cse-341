@@ -10,6 +10,7 @@ import {
   reviewsValidationRules,
   checkRulesResults,
 } from '../middlewares/validations.mjs';
+import { loginProtection } from '../middlewares/authenticaction.mjs';
 
 const router = Router();
 
@@ -18,6 +19,7 @@ router.post(
   '/create/:product_id',
   reviewsValidationRules(),
   checkRulesResults,
+  loginProtection,
   createReview
 );
 
@@ -25,17 +27,18 @@ router.post(
 router.get('/:product_id', getAllReviews);
 
 //get all the review posted by a user
-router.get('/user-reviews/:user_id', getUserReviews);
+router.get('/user-reviews/:user_id', loginProtection, getUserReviews);
 
 //update a review
 router.put(
   '/update/:review_id',
   reviewsValidationRules(),
   checkRulesResults,
+  loginProtection,
   updateReview
 );
 
 //delete a review
-router.delete('/delete/:review_id', deleteReview);
+router.delete('/delete/:review_id', loginProtection, deleteReview);
 
 export default router;

@@ -10,10 +10,12 @@ import {
   ProductValidationRules,
   checkRulesResults,
 } from '../middlewares/validations.mjs';
+import { loginProtection } from '../middlewares/authenticaction.mjs';
+import { restrictTo } from '../middlewares/authorization.mjs';
 const router = Router();
 
 //getting all products route
-router.get('/', getAllProducts);
+router.get('/', loginProtection, restrictTo('admin'), getAllProducts);
 
 //getting product by id
 router.get('/:product_id', productById);
@@ -23,6 +25,8 @@ router.post(
   '/create',
   ProductValidationRules(),
   checkRulesResults,
+  loginProtection,
+  restrictTo('admin'),
   createProduct
 );
 
@@ -31,11 +35,18 @@ router.put(
   '/update/:product_id',
   ProductValidationRules(),
   checkRulesResults,
+  loginProtection,
+  restrictTo('admin'),
   updateProduct
 );
 
 //deleting product by id
 
-router.delete('/delete/:product_id', deleteProduct);
+router.delete(
+  '/delete/:product_id',
+  loginProtection,
+  restrictTo('admin'),
+  deleteProduct
+);
 
 export default router;

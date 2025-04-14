@@ -53,10 +53,10 @@ router.delete(
 );
 
 //route for process the local login
-router.post('/login', localLogin);
+router.post('/login', loginValidationRules(), checkRulesResults, localLogin);
 
 //rooute for the log out
-router.post('/log-out', loginValidationRules(), checkRulesResults, userLogout);
+router.post('/log-out', userLogout);
 
 //Google Oauth
 router.get(
