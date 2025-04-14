@@ -44,13 +44,7 @@ router.put(
 
 //delete an user account
 
-router.delete(
-  '/delete/:user_id',
-  userValidationRules(),
-  checkRulesResults,
-  loginProtection,
-  deleteAccount
-);
+router.delete('/delete/:user_id', loginProtection, deleteAccount);
 
 //route for process the local login
 router.post('/login', loginValidationRules(), checkRulesResults, localLogin);
