@@ -15,7 +15,7 @@ import { restrictTo } from '../middlewares/authorization.mjs';
 const router = Router();
 
 //getting all products route
-router.get('/', loginProtection, restrictTo('admin'), getAllProducts);
+router.get('/', getAllProducts);
 
 //getting product by id
 router.get('/:product_id', productById);
