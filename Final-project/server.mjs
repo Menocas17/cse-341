@@ -10,7 +10,7 @@ import cookieParser from 'cookie-parser';
 import passport from 'passport';
 import './config/passport.mjs';
 import swaggerUI from 'swagger-ui-express';
-// import swaggerDocumentation from './swagger.json' with { type: 'json' };
+import swaggerDocumentation from './swagger.json' with { type: 'json' };
 import { errorMiddleware } from './middlewares/handleErrors.mjs';
 
 dotenv.config();
@@ -31,6 +31,7 @@ app.get('/', (req, res) => {
 });
 
 //routes
+app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocumentation));
 app.use('/products', productsRoutes);
 app.use('/carts', cartsRoutes);
 app.use('/users', usersRoutes);

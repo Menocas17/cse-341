@@ -11,8 +11,8 @@ export async function getCartByUserId(req, res, next) {
     const cart = await cartModel.findOne({
       user_id: user_id,
     });
-    if (!cart) {
-      return res.status(404).json({ message: 'The is no cart for this user' });
+    if (!cart || cart.length === 0) {
+      return res.status(404).json({ message: 'Cart is empty' });
     }
 
     const items = await Promise.all(
