@@ -7,7 +7,7 @@
   },
   "host": "online-store-cse341.onrender.com",
   "basePath": "/",
-  "schemes": ["http", "https"],
+  "schemes": ["https"],
   "paths": {
     "/": {
       "get": {
@@ -21,16 +21,10 @@
     },
     "/products/": {
       "get": {
-        "description": "With this endpoint you are going to be able to fetch all the products in the inventory, this route is protected with authentication and authorization which means you need to be logged in and be an admin access to this endpoint",
+        "description": "With this endpoint you are going to be able to fetch all the products in the inventory",
         "responses": {
           "200": {
             "description": "OK"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
           },
           "404": {
             "description": "Not Found"
@@ -40,7 +34,7 @@
     },
     "/products/{product_id}": {
       "get": {
-        "description": "You can search for an specific product looking it by it's product_id, this endpoint is protected with authentication",
+        "description": "You can search for an specific product looking it by it's product_id",
         "parameters": [
           {
             "name": "product_id",
@@ -52,12 +46,6 @@
         "responses": {
           "200": {
             "description": "OK"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
           },
           "404": {
             "description": "Not Found"
