@@ -9,7 +9,7 @@ Content-Type: application/json
     "user_birthday": "2000-01-01",
     "user_address": "De la plaza Julio Martinez 6c al lago, 1c arriba",
     "user_email": "rodolfomenocal1755@gmail.com",
-    "user_password": "TestingPassword17!",
+    "password": "TestingPassword17!",
     "user_phone_number":"+505 769181745"
 }
 

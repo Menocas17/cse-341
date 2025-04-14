@@ -19,13 +19,14 @@ export async function localLogin(req, res, next) {
 
       const token = createToken(user);
 
-      res.status(200).json({
-        message: `Successfully logged in, welcome ${user.name}`,
-      });
       res.cookie('access_token', token, {
         httpOnly: true,
         secure: process.env.NODE_ENV === 'production',
         maxAge: 7200000,
+      });
+
+      res.status(200).json({
+        message: `Successfully logged in, welcome ${user.name}`,
       });
     })(req, res, next);
   } catch (err) {
