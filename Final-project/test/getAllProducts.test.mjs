@@ -1,28 +1,25 @@
 import mockingoose from 'mockingoose';
-import { productModel } from '../models/productModel.mjs'; // Adjust the path if needed
+import { productModel } from '../models/productModel.mjs';
 import { jest } from '@jest/globals';
-import {
-  getAllProducts,
-  productById,
-} from '../controllers/productsController.mjs';
+import { getAllProducts } from '../controllers/productsController.mjs';
 
 describe('Unit tests for productController', () => {
-  let req, res, next;
-
   beforeEach(() => {
-    req = {
-      params: { product_id: '67ec2e33af36361fc07eb66e' },
+    jest.clearAllMocks();
+  });
+
+  it('should return 200 and an array of all products', async () => {
+    const mockRequest = {
+      params: {},
     };
 
-    res = {
+    const mockResponse = {
       status: jest.fn().mockReturnThis(),
       json: jest.fn(),
     };
 
-    next = jest.fn();
-  });
+    const mockNext = jest.fn();
 
-  it('should return 200 and an array of all products', async () => {
     const mockProducts = [
       {
         _id: '67ec2e33af36361fc07eb66e',
@@ -37,11 +34,11 @@ describe('Unit tests for productController', () => {
 
     mockingoose(productModel).toReturn(mockProducts, 'find');
 
-    await getAllProducts(req, res, next);
+    await getAllProducts(mockRequest, mockResponse, mockNext);
 
-    expect(res.status).toHaveBeenCalledWith(200);
+    expect(mockResponse.status).toHaveBeenCalledWith(200);
 
-    expect(res.json).toHaveBeenCalledWith(
+    expect(mockResponse.json).toHaveBeenCalledWith(
       expect.arrayContaining([
         expect.objectContaining({
           product_brand: 'TestingBrand',
@@ -56,11 +53,23 @@ describe('Unit tests for productController', () => {
   });
 
   it('should handle error and call next(err)', async () => {
+    const mockRequest = {
+      params: {},
+    };
+
+    const mockResponse = {
+      status: jest.fn().mockReturnThis(),
+      json: jest.fn(),
+    };
+
+    const mockNext = jest.fn();
     const error = new Error('Database error');
     mockingoose(productModel).toReturn(error, 'find');
 
-    await getAllProducts(req, res, next);
+    await getAllProducts(mockRequest, mockResponse, mockNext);
 
-    expect(next).toHaveBeenCalledWith(error);
+    expect(mockNext).toHaveBeenCalledWith(error);
   });
+
+  it('should return a 404 error when there is no products');
 });

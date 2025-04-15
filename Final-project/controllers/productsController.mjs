@@ -14,18 +14,14 @@ export async function getAllProducts(req, res, next) {
 
 //get product by id
 
-export async function productById(req, res, next, product_id_param) {
-  const product_id = product_id_param || req.params.product_id;
+export async function productById(req, res, next) {
+  const product_id = req.params.product_id;
 
   try {
     const product = await productModel.findById(product_id).lean();
 
     if (!product) {
       return res.status(404).json({ message: 'Product not found' });
-    }
-
-    if (product_id_param) {
-      return product;
     }
 
     res.status(200).json(product);

@@ -4,18 +4,22 @@ import { getAllUsers } from '../controllers/userController.mjs';
 import { jest } from '@jest/globals';
 
 describe('unit test for the getAllUser controller', () => {
-  let req, res, next;
-
   beforeEach(() => {
-    req = {};
-    res = {
-      status: jest.fn().mockReturnThis(),
-      json: jest.fn(),
-    };
-    next = jest.fn();
+    jest.clearAllMocks();
   });
 
   it('should return a json with all users and status 200', async () => {
+    const mockRequest = {
+      params: {},
+    };
+
+    const mockResponse = {
+      status: jest.fn().mockReturnThis(),
+      json: jest.fn(),
+    };
+
+    const mockNext = jest.fn();
+
     const mockUsers = [
       {
         user_name: 'Rodolfo',
@@ -32,10 +36,10 @@ describe('unit test for the getAllUser controller', () => {
 
     mockingoose(userModel).toReturn(mockUsers, 'find');
 
-    await getAllUsers(req, res, next);
+    await getAllUsers(mockRequest, mockResponse, mockNext);
 
-    expect(res.status).toHaveBeenCalledWith(200);
-    expect(res.json).toHaveBeenCalledWith(
+    expect(mockResponse.status).toHaveBeenCalledWith(200);
+    expect(mockResponse.json).toHaveBeenCalledWith(
       expect.arrayContaining([
         expect.objectContaining({
           user_name: 'Rodolfo',
@@ -53,22 +57,44 @@ describe('unit test for the getAllUser controller', () => {
   });
 
   it('should return 404 if no users are found', async () => {
+    const mockRequest = {
+      params: {},
+    };
+
+    const mockResponse = {
+      status: jest.fn().mockReturnThis(),
+      json: jest.fn(),
+    };
+
+    const mockNext = jest.fn();
+
     mockingoose(userModel).toReturn([], 'find');
 
-    await getAllUsers(req, res, next);
+    await getAllUsers(mockRequest, mockResponse, mockNext);
 
-    expect(res.status).toHaveBeenCalledWith(404);
-    expect(res.json).toHaveBeenCalledWith({
+    expect(mockResponse.status).toHaveBeenCalledWith(404);
+    expect(mockResponse.json).toHaveBeenCalledWith({
       message: 'Sorry looks like there is no users in the database',
     });
   });
 
   it('should call next(err) on error', async () => {
+    const mockRequest = {
+      params: {},
+    };
+
+    const mockResponse = {
+      status: jest.fn().mockReturnThis(),
+      json: jest.fn(),
+    };
+
+    const mockNext = jest.fn();
+
     const error = new Error('Database error');
     mockingoose(userModel).toReturn(error, 'find');
 
-    await getAllUsers(req, res, next);
+    await getAllUsers(mockRequest, mockResponse, mockNext);
 
-    expect(next).toHaveBeenCalledWith(error);
+    expect(mockNext).toHaveBeenCalledWith(error);
   });
 });
