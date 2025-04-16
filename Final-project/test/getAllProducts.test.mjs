@@ -70,6 +70,4 @@ describe('Unit tests for productController', () => {
 
     expect(mockNext).toHaveBeenCalledWith(error);
   });
-
-  it('should return a 404 error when there is no products');
 });
