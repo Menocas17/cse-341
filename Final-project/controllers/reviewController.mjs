@@ -33,7 +33,8 @@ export async function getAllReviews(req, res, next) {
   try {
     const allReviews = await reviewModel
       .find({ product_id })
-      .populate('user_id', 'user_name user_lastName');
+      .populate('user_id', 'user_name user_lastName')
+      .lean();
 
     if (allReviews.length === 0) {
       return res
@@ -58,7 +59,8 @@ export async function getUserReviews(req, res, next) {
   try {
     const allUserReviews = await reviewModel
       .find({ user_id })
-      .populate('product_id', 'product_name');
+      .populate('product_id', 'product_name')
+      .lean();
 
     if (allUserReviews.length === 0) {
       return res

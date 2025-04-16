@@ -26,7 +26,7 @@ export async function localLogin(req, res, next) {
       });
 
       res.status(200).json({
-        message: `Successfully logged in, welcome ${user.name}`,
+        message: `Successfully logged in, welcome ${user.user_name}`,
       });
     })(req, res, next);
   } catch (err) {

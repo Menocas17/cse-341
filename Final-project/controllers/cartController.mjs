@@ -1,6 +1,6 @@
 import { cartModel } from '../models/cartModel.mjs';
 import { userModel } from '../models/userModel.mjs';
-import { productById } from './productsController.mjs';
+import { getProductDetailsById } from '../utilities/getProductById.mjs';
 
 //get cart by user id
 
@@ -17,12 +17,7 @@ export async function getCartByUserId(req, res, next) {
 
     const items = await Promise.all(
       cart.items.map(async (product) => {
-        const productDetails = await productById(
-          null,
-          null,
-          null,
-          product.product_id
-        );
+        const productDetails = await getProductDetailsById(product.product_id);
 
         return {
           quantity: product.quantity,
